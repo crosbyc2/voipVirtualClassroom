@@ -16,6 +16,9 @@ import { Member } from './member.entity';
     @Column()
     name: string;
 
+    @Column()
+    filename: string;
+
     @ManyToMany(
       type => Member)
 

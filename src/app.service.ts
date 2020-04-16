@@ -7,6 +7,7 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class AppService {
 
+
   constructor(
     @Inject('ROOM')
     private readonly roomRepo: Repository<Room>,
@@ -21,18 +22,30 @@ export class AppService {
     },
   });
 
-  public async createSession(roomname, username ) {
+
+  public async getRoom(id){
+    const r = await   this.roomRepo.findOne({
+      where : { name : id}
+    });
+    console.log(r);
+  return r;
+  }
+  public async createSession(roomname, username, filename ) {
     let room  = ({
       name : roomname,
+      filename
     } as Room);
 
     room = await this.roomRepo.save(room);
-    const remoteRoom  = await this.twilio.createRoom( room.id );
+
+    const remoteRoom  = await this.twilio.createRoom( room.name );
     
+
     return {
       remoteRoom,
       room,
-      hostJwt : this.twilio.grantForRoom(room.id, username),
+      token : this.twilio.grantForRoom(room.name, username, true),
+      username
     };
 
   }
@@ -51,6 +64,10 @@ export class AppService {
         }
         console.log(info);
     });
+  }
+
+  public joinRoom(id: any, name: any) {
+    return this.twilio.grantForRoom(id, name, false);
   }
 
 }

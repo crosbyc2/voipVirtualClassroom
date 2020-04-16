@@ -26,7 +26,7 @@ export const testDatabaseProvider = [
           type: 'sqlite',
           database: ':memory:',
           dropSchema: true,
-          entities: ['../**/*.entity.ts'],
+          entities: ['dist/**/*.entity.js'],
           synchronize: true,
           logging: false,
           name: 'testConnectionName',
