@@ -30,7 +30,9 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.0",
     "rxjs": "^6.5.3",
-    "twilio": "^3.41.1"
+    "sqlite3": "^4.1.1",
+    "twilio": "^3.41.1",
+    "typeorm": "^0.2.24"
   },
   "devDependencies": {
     "@nestjs/cli": "^6.9.0",
